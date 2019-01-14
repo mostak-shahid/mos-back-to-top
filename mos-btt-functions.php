@@ -26,17 +26,6 @@ function mos_btt_admin_enqueue_scripts(){
 		wp_enqueue_script( 'css-hint', plugins_url( 'plugins/CodeMirror/addon/hint/css-hint.js', __FILE__ ), array('jquery') );
 		wp_enqueue_script( 'javascript-hint', plugins_url( 'plugins/CodeMirror/addon/hint/javascript-hint.js', __FILE__ ), array('jquery') );
 		/*Editor*/
-		/*Select 2*/
-		/*
-<script type="text/javascript" src="dist/js/select2.full.js"></script>
-<script type="text/javascript" src="vendor/js/prettify.min.js"></script>
-
-<link href="dist/css/select2.min.css" type="text/css" rel="stylesheet" />
-		*/
-		wp_enqueue_style( 'select2', plugins_url( 'plugins/select2/select2.min.css', __FILE__ ) );
-		wp_enqueue_script( 'select2', plugins_url( 'plugins/select2/select2.full.js', __FILE__ ), array('jquery') );
-		wp_enqueue_script( 'prettify', plugins_url( 'plugins/select2/prettify.min.js', __FILE__ ), array('jquery') );
-		/*Select 2*/
 
 		wp_enqueue_script( 'mos-btt-functions', plugins_url( 'js/mos-btt-functions.js', __FILE__ ), array('jquery') );
 		wp_enqueue_script( 'mos-btt-admin', plugins_url( 'js/mos-btt-admin.js', __FILE__ ), array('jquery') );
