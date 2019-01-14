@@ -74,19 +74,10 @@ function mos_btt_field_btt_icon_cb( $args ) {
 
 function mos_btt_field_btt_orientation_cb( $args ) {
 	$options = get_option( 'mos_btt_options' );
-	var_dump($options);
 	?>
-	<!-- <input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>]" id="<?php echo esc_attr( $args['label_for'] ); ?>" type='text' class='flexdatalist' data-min-length='1' data-searchContain='true' multiple='multiple' list='orientations' value="<?php echo isset( $options[ $args['label_for'] ] ) ? esc_html_e($options[$args['label_for']]) : $args['default'];?>"  placeholder='XXX' required>
-	<datalist id="orientations">
-		<option value="{{icon}}">{{icon}}</option>
-		<option value="{{text}}">{{text}}</option>
-		<option value="{{image}}">{{image}}</option>
-	</datalist> -->
-	<select name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="select-2 regular-text" multiple="multiple">
-		<option value="{{icon}}">{{icon}}</option>
-		<option value="{{text}}">{{text}}</option>
-		<option value="{{image}}">{{image}}</option>
-	</select>
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>]" id="<?php echo esc_attr( $args['label_for'] ); ?>" type='text' class='regular-text' value="<?php echo isset( $options[ $args['label_for'] ] ) ? esc_html_e($options[$args['label_for']]) : $args['default'];?>" required>
+	<small class="form-text text-muted">{{inon}}{{text}}{{image}}</small>
+
 	<?php
 }
 function mos_btt_section_scripts_start_cb( $args ) {
