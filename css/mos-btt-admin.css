@@ -6,5 +6,6 @@
 .btn-group>.button{float: left;border-radius:0!important;}
 .btn-group>.dropdown-menu{display:none}
 .btn-group>.dropdown-menu:before{content:" ";display:table;width:100%;clear:both}
-.btn-group .iconpicker-items {width:265px;height:228px;border:1px solid #0073aa;overflow:auto;margin-top:10px;}
-.btn-group .iconpicker-item {display:inline-block;width:30px;line-height:30px;text-align:center;border:1px solid #0073aa;border-radius:3px;margin: 3px;}
+.btn-group .iconpicker-items{width:265px;height:228px;border:1px solid #0073aa;overflow:auto;margin-top:10px;}
+.btn-group .iconpicker-item{display:inline-block;width:30px;line-height:30px;text-align:center;border:1px solid #0073aa;border-radius:3px;margin: 3px;}
+.form-text{display: block;font-size:12px;margin-top: 5px;}
