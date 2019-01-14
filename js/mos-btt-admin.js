@@ -26,4 +26,5 @@ jQuery(document).ready(function($) {
     $('.iconpicker-component > i').removeAttr("class").addClass(value);
     $(this).closest('.dropdown-menu').hide();
   });
+  $(".select-2").select2();
 });
