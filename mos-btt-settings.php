@@ -76,7 +76,7 @@ function mos_btt_field_btt_orientation_cb( $args ) {
 	$options = get_option( 'mos_btt_options' );
 	?>
 	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>]" id="<?php echo esc_attr( $args['label_for'] ); ?>" type='text' class='regular-text' value="<?php echo isset( $options[ $args['label_for'] ] ) ? esc_html_e($options[$args['label_for']]) : $args['default'];?>" required>
-	<small class="form-text text-muted">{{inon}}{{text}}{{image}}</small>
+	<small class="form-text text-muted">{{icon}}{{text}}{{image}}</small>
 
 	<?php
 }

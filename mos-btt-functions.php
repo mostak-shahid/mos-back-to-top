@@ -60,10 +60,13 @@ add_action( 'admin_enqueue_scripts', 'mos_btt_ajax_scripts' );
 add_action( 'wp_footer', 'mos_btt_fnc', 10 );
 function mos_btt_fnc () {
 	$mos_btt_option = get_option( 'mos_btt_options' );
-	var_dump($mos_btt_option);
+	//var_dump($mos_btt_option);
 	$text = ($mos_btt_option['mos_btt_text'])  ?$mos_btt_option['mos_btt_text']:'';	
 	$icon = ($mos_btt_option['mos_btt_icon']) ? $mos_btt_option['mos_btt_icon']:'';	
-	$orientation = ($mos_btt_option['mos_btt_orientation']) ? $mos_btt_option['mos_btt_orientation']:'';	
+	$orientation = ($mos_btt_option['mos_btt_orientation']) ? $mos_btt_option['mos_btt_orientation']:'';
+	$orientation = str_replace("{{text}}",$text,$orientation);	
+	$orientation = str_replace("{{icon}}",'<i class="'.$icon.'">i</i>',$orientation);
+	var_dump($orientation);
 	?>
 	<a href="javascript:void(0)" class="scrollup" style="display: none;"><?php echo $orientation ?></a>
 	<?php
