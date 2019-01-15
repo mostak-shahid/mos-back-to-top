@@ -5,11 +5,18 @@ function mos_btt_settings_init() {
 	add_settings_section('mos_btt_section_general_start', '', 'mos_btt_section_general_start_cb', 'mos_btt');
 	add_settings_field( 'field_btt_text', __( 'Button Text', 'mos_btt' ), 'mos_btt_field_btt_text_cb', 'mos_btt', 'mos_btt_section_general_start', [ 'label_for' => 'mos_btt_text' ] );
 	add_settings_field( 'field_btt_icon', __( 'Button Icon', 'mos_btt' ), 'mos_btt_field_btt_icon_cb', 'mos_btt', 'mos_btt_section_general_start', [ 'label_for' => 'mos_btt_icon' ] );
-	add_settings_field( 'field_btt_image', __( 'Button Image', 'mos_btt' ), 'mos_btt_field_btt_image_cb', 'mos_btt', 'mos_btt_section_general_start', [ 'label_for' => 'mos_btt_image', 'default' => plugins_url( 'images/icon_top.png', __FILE__ ) ] );
-	
+	add_settings_field( 'field_btt_image', __( 'Button Image', 'mos_btt' ), 'mos_btt_field_btt_image_cb', 'mos_btt', 'mos_btt_section_general_start', [ 'label_for' => 'mos_btt_image', 'default' => plugins_url( 'images/icon_top.png', __FILE__ ) ] );	
 	add_settings_field( 'field_btt_orientation', __( 'Orientation', 'mos_btt' ), 'mos_btt_field_btt_orientation_cb', 'mos_btt', 'mos_btt_section_general_start', [ 'label_for' => 'mos_btt_orientation', 'default' => '{{icon}},{{text}}' ] );
 	add_settings_section('mos_btt_section_general_end', '', 'mos_btt_section_end_cb', 'mos_btt');
 	
+	add_settings_section('mos_btt_section_styling_start', '', 'mos_btt_section_styling_start_cb', 'mos_btt');
+	add_settings_field( 'field_btt_margin', __( 'Button Margin', 'mos_btt' ), 'mos_btt_field_btt_margin_cb', 'mos_btt', 'mos_btt_section_styling_start', [ 'label_for' => 'mos_btt_margin' ] );
+	add_settings_field( 'field_btt_padding', __( 'Button Padding', 'mos_btt' ), 'mos_btt_field_btt_padding_cb', 'mos_btt', 'mos_btt_section_styling_start', [ 'label_for' => 'mos_btt_padding' ] );
+	add_settings_field( 'field_btt_position', __( 'Button Padding', 'mos_btt' ), 'mos_btt_field_btt_position_cb', 'mos_btt', 'mos_btt_section_styling_start', [ 'label_for' => 'mos_btt_position' ] );
+	add_settings_field( 'field_btt_border', __( 'Button Border', 'mos_btt' ), 'mos_btt_field_btt_border_cb', 'mos_btt', 'mos_btt_section_styling_start', [ 'label_for' => 'mos_btt_border' ] );
+	add_settings_section('mos_btt_section_styling_end', '', 'mos_btt_section_end_cb', 'mos_btt');
+
+
 	add_settings_section('mos_btt_section_scripts_start', '', 'mos_btt_section_scripts_start_cb', 'mos_btt');
 	add_settings_field( 'field_jquery', __( 'JQuery', 'mos_btt' ), 'mos_btt_field_jquery_cb', 'mos_btt', 'mos_btt_section_scripts_start', [ 'label_for' => 'jquery' ] );
 	add_settings_field( 'field_fontawesome', __( 'Font Awesome', 'mos_btt' ), 'mos_btt_field_fontawesome_cb', 'mos_btt', 'mos_btt_section_scripts_start', [ 'label_for' => 'fontawesome' ] );
@@ -36,6 +43,7 @@ function mos_btt_section_top_nav_cb( $args ) {
 	?>
     <ul class="nav nav-tabs">
         <li class="tab-nav <?php if($data['active_tab'] == 'general') echo 'active';?>"><a data-id="general" href="<?php echo $data['option_prefix'];?>general">General</a></li>
+        <li class="tab-nav <?php if($data['active_tab'] == 'styling') echo 'active';?>"><a data-id="styling" href="<?php echo $data['option_prefix'];?>styling">Styling</a></li>
         <li class="tab-nav <?php if($data['active_tab'] == 'scripts') echo 'active';?>"><a data-id="scripts" href="<?php echo $data['option_prefix'];?>scripts">Advanced CSS, JS</a></li>
     </ul>
 	<?php
@@ -76,7 +84,6 @@ function mos_btt_field_btt_icon_cb( $args ) {
 
 function mos_btt_field_btt_image_cb( $args ) {
 	$options = get_option( 'mos_btt_options' );
-	var_dump($options);
 	?>
 	<div class="btt-img-wrapper">
 		<img src="<?php echo isset( $options[ $args['label_for'] ]['url'] ) ? esc_html_e($options[$args['label_for']]['url']) : $args['default'];?>" alt="">
@@ -100,12 +107,47 @@ function mos_btt_field_btt_orientation_cb( $args ) {
 
 	<?php
 }
+function mos_btt_section_styling_start_cb( $args ) {
+	$data = get_mos_btt_active_tab ();
+	?>
+	<div id="mos-btt-styling" class="tab-con <?php if($data['active_tab'] == 'styling') echo 'active';?>">
+	<?php
+}
 function mos_btt_section_scripts_start_cb( $args ) {
 	$data = get_mos_btt_active_tab ();
 	?>
 	<div id="mos-btt-scripts" class="tab-con <?php if($data['active_tab'] == 'scripts') echo 'active';?>">
 	<?php
 }
+function mos_btt_field_btt_margin_cb( $args ) {
+	$options = get_option( 'mos_btt_options' );
+	?>
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][top]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['top'] ) ? esc_html_e($options[$args['label_for']]['top']) : '';?>" placeholder="Top">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][right]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['right'] ) ? esc_html_e($options[$args['label_for']]['right']) : '';?>" placeholder="Right">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][bottom]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['bottom'] ) ? esc_html_e($options[$args['label_for']]['bottom']) : '';?>" placeholder="Bottom">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][left]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['left'] ) ? esc_html_e($options[$args['label_for']]['left']) : '';?>" placeholder="Left">
+
+	<?php
+}
+function mos_btt_field_btt_padding_cb( $args ) {
+	$options = get_option( 'mos_btt_options' );
+	?>
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][top]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['top'] ) ? esc_html_e($options[$args['label_for']]['top']) : '';?>" placeholder="Top">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][right]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['right'] ) ? esc_html_e($options[$args['label_for']]['right']) : '';?>" placeholder="Right">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][bottom]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['bottom'] ) ? esc_html_e($options[$args['label_for']]['bottom']) : '';?>" placeholder="Bottom">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][left]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['left'] ) ? esc_html_e($options[$args['label_for']]['left']) : '';?>" placeholder="Left">
+	<?php
+}
+function mos_btt_field_btt_position_cb( $args ) {
+	$options = get_option( 'mos_btt_options' );
+	?>
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][top]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['top'] ) ? esc_html_e($options[$args['label_for']]['top']) : '';?>" placeholder="Top">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][right]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['right'] ) ? esc_html_e($options[$args['label_for']]['right']) : '';?>" placeholder="Right">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][bottom]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['bottom'] ) ? esc_html_e($options[$args['label_for']]['bottom']) : '';?>" placeholder="Bottom">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][left]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['left'] ) ? esc_html_e($options[$args['label_for']]['left']) : '';?>" placeholder="Left">
+	<?php
+}
+
 function mos_btt_field_jquery_cb( $args ) {
 	$options = get_option( 'mos_btt_options' );
 	?>
