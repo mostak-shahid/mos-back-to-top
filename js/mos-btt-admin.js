@@ -26,5 +26,33 @@ jQuery(document).ready(function($) {
     $('.iconpicker-component > i').removeAttr("class").addClass(value);
     $(this).closest('.dropdown-menu').hide();
   });
-  $(".select-2").select2();
+
+  $("button.open-window").live("click", function(e){
+    e.preventDefault();
+    var imageUploader = wp.media({
+      'title'     : 'Upload Image',
+      'button'    : {
+        'text'  : 'Set the image'
+      },
+      'multiple'  : false
+    });
+    imageUploader.open();
+    var button = $(this);
+    imageUploader.on("select", function(){
+      var image = imageUploader.state().get("selection").first().toJSON();
+      console.log(image);
+      var image_link = image.url;
+      $("input.btt_img_url").val(image_link);
+      button.siblings('input.btt_img_url').val(image_link);
+      button.siblings('input.btt_img_id').val(image.id);
+      button.siblings('input.btt_img_width').val(image.width);
+      button.siblings('input.btt_img_height').val(image.height);
+      button.parent().siblings('div.btt-img-wrapper').find('img').attr('src', image_link);
+    })
+  });
+  $("button.remove-img").live("click", function(d){
+    d.preventDefault();
+    $(this).siblings('input.btt_img_url').val('');
+    $(this).parent().siblings('div.btt-img-wrapper').find('img').attr('src', '');
+  })
 });

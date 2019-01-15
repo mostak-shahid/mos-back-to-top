@@ -9,3 +9,8 @@
 .btn-group .iconpicker-items{width:265px;height:228px;border:1px solid #0073aa;overflow:auto;margin-top:10px;}
 .btn-group .iconpicker-item{display:inline-block;width:30px;line-height:30px;text-align:center;border:1px solid #0073aa;border-radius:3px;margin: 3px;}
 .form-text{display: block;font-size:12px;margin-top: 5px;}
+.button-wrapper,.btt-img-wrapper{width: 25em;}
+.btt-img-wrapper img{max-width: 100%;height: auto;}
+.btn-half-block{width:50%;border-right-style:none;-webkit-border-radius:0!important;-moz-border-radius:0!important;-ms-border-radius:0!important;-o-border-radius:0!important;border-radius:0!important;}
+.btn-success{color:#fff!important;background-color:#5cb85c!important;border-color:#4cae4c!important;}
+.btn-danger{color:#fff!important;background-color:#d9534f!important;border-color:#d43f3a!important;}

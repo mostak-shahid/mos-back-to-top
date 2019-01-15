@@ -10,7 +10,7 @@ function mos_btt_admin_enqueue_scripts(){
 		wp_enqueue_style( 'font-awesome.min', plugins_url( 'fonts/font-awesome-4.7.0/css/font-awesome.min.css', __FILE__ ) );
 		wp_enqueue_style( 'mos-btt-admin', plugins_url( 'css/mos-btt-admin.css', __FILE__ ) );
 
-		//wp_enqueue_media();
+		wp_enqueue_media();
 
 		wp_enqueue_script( 'jquery' );
 		
@@ -60,15 +60,21 @@ add_action( 'admin_enqueue_scripts', 'mos_btt_ajax_scripts' );
 add_action( 'wp_footer', 'mos_btt_fnc', 10 );
 function mos_btt_fnc () {
 	$mos_btt_option = get_option( 'mos_btt_options' );
-	//var_dump($mos_btt_option);
 	$text = ($mos_btt_option['mos_btt_text'])  ?$mos_btt_option['mos_btt_text']:'';	
 	$icon = ($mos_btt_option['mos_btt_icon']) ? $mos_btt_option['mos_btt_icon']:'';	
+	$image = ($mos_btt_option['mos_btt_image']['url']) ? $mos_btt_option['mos_btt_image']['url']:'';	
+	$image_width = ($mos_btt_option['mos_btt_image']['width']) ? $mos_btt_option['mos_btt_image']['width']:'40';	
+	$image_height = ($mos_btt_option['mos_btt_image']['height']) ? $mos_btt_option['mos_btt_image']['height']:'40';	
 	$orientation = ($mos_btt_option['mos_btt_orientation']) ? $mos_btt_option['mos_btt_orientation']:'';
-	$orientation = str_replace("{{text}}",$text,$orientation);	
-	$orientation = str_replace("{{icon}}",'<i class="'.$icon.'">i</i>',$orientation);
-	var_dump($orientation);
+	if ($text) $orientation = str_replace("{{text}}",'<span class="btt-text">'.$text.'</span>',$orientation);
+	else $orientation = str_replace("{{text}}",'',$orientation);
+	if ($icon) $orientation = str_replace("{{icon}}",'<span class="btt-icon"><i class="'.$icon.'"></i></span>',$orientation);
+	else $orientation = str_replace("{{icon}}",'',$orientation);
+	if ($image) $orientation = str_replace("{{image}}",'<span class="btt-image"><img src="'.$image.'" width="'.$image_width.'" height="'.$image_height.'" alt="Back to Top"></span>',$orientation);
+	else $orientation = str_replace("{{image}}",'',$orientation);
+	//var_dump($orientation);
 	?>
-	<a href="javascript:void(0)" class="scrollup" style="display: none;"><?php echo $orientation ?></a>
+	<a href="#" class="scrollup" style="display: none;"><?php echo $orientation ?></a>
 	<?php
 }
 function mos_btt_scripts() {
