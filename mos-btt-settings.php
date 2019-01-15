@@ -14,6 +14,7 @@ function mos_btt_settings_init() {
 	add_settings_field( 'field_btt_padding', __( 'Button Padding', 'mos_btt' ), 'mos_btt_field_btt_padding_cb', 'mos_btt', 'mos_btt_section_styling_start', [ 'label_for' => 'mos_btt_padding' ] );
 	add_settings_field( 'field_btt_position', __( 'Button Padding', 'mos_btt' ), 'mos_btt_field_btt_position_cb', 'mos_btt', 'mos_btt_section_styling_start', [ 'label_for' => 'mos_btt_position' ] );
 	add_settings_field( 'field_btt_border', __( 'Button Border', 'mos_btt' ), 'mos_btt_field_btt_border_cb', 'mos_btt', 'mos_btt_section_styling_start', [ 'label_for' => 'mos_btt_border' ] );
+	add_settings_field( 'field_btt_background', __( 'Button Background', 'mos_btt' ), 'mos_btt_field_btt_background_cb', 'mos_btt', 'mos_btt_section_styling_start', [ 'label_for' => 'mos_btt_background' ] );
 	add_settings_section('mos_btt_section_styling_end', '', 'mos_btt_section_end_cb', 'mos_btt');
 
 
@@ -138,7 +139,15 @@ function mos_btt_field_btt_padding_cb( $args ) {
 	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][left]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['left'] ) ? esc_html_e($options[$args['label_for']]['left']) : '';?>" placeholder="Left">
 	<?php
 }
-
+function mos_btt_field_btt_position_cb( $args ) {
+	$options = get_option( 'mos_btt_options' );
+	?>
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][top]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['top'] ) ? esc_html_e($options[$args['label_for']]['top']) : '';?>" placeholder="Top">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][right]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['right'] ) ? esc_html_e($options[$args['label_for']]['right']) : '';?>" placeholder="Right">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][bottom]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['bottom'] ) ? esc_html_e($options[$args['label_for']]['bottom']) : '';?>" placeholder="Bottom">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][left]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['left'] ) ? esc_html_e($options[$args['label_for']]['left']) : '';?>" placeholder="Left">
+	<?php
+}
 function mos_btt_field_btt_border_cb( $args ) {
 	$options = get_option( 'mos_btt_options' );
 	?>
@@ -147,13 +156,12 @@ function mos_btt_field_btt_border_cb( $args ) {
 
 	<?php
 }
-function mos_btt_field_btt_position_cb( $args ) {
+function mos_btt_field_btt_background_cb( $args ) {
 	$options = get_option( 'mos_btt_options' );
 	?>
-	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][top]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['top'] ) ? esc_html_e($options[$args['label_for']]['top']) : '';?>" placeholder="Top">
-	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][right]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['right'] ) ? esc_html_e($options[$args['label_for']]['right']) : '';?>" placeholder="Right">
-	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][bottom]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['bottom'] ) ? esc_html_e($options[$args['label_for']]['bottom']) : '';?>" placeholder="Bottom">
-	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>][left]" id="<?php echo esc_attr( $args['label_for'] ); ?>" class="small-text" value="<?php echo isset( $options[ $args['label_for'] ]['left'] ) ? esc_html_e($options[$args['label_for']]['left']) : '';?>" placeholder="Left">
+	<input name="mos_btt_options[<?php echo esc_attr( $args['label_for'] ); ?>]" id="<?php echo esc_attr( $args['label_for'] ); ?>" type='text' class='moscp regular-text' value="<?php echo isset( $options[ $args['label_for'] ] ) ? esc_html_e($options[$args['label_for']]) : $args['default'];?>" required>
+	
+
 	<?php
 }
 

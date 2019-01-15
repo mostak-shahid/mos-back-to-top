@@ -8,10 +8,12 @@ function mos_btt_admin_enqueue_scripts(){
 	
 	if ($pagenow == 'options-general.php' AND $page == 'mos_btt_settings') {
 		wp_enqueue_style( 'font-awesome.min', plugins_url( 'fonts/font-awesome-4.7.0/css/font-awesome.min.css', __FILE__ ) );
+
+
+		wp_enqueue_style( 'jquery.minicolors', plugins_url( 'plugins/colorpicker/jquery.minicolors.css', __FILE__ ) );
 		wp_enqueue_style( 'mos-btt-admin', plugins_url( 'css/mos-btt-admin.css', __FILE__ ) );
 
 		wp_enqueue_media();
-
 		wp_enqueue_script( 'jquery' );
 		
 		/*Editor*/
@@ -26,7 +28,7 @@ function mos_btt_admin_enqueue_scripts(){
 		wp_enqueue_script( 'css-hint', plugins_url( 'plugins/CodeMirror/addon/hint/css-hint.js', __FILE__ ), array('jquery') );
 		wp_enqueue_script( 'javascript-hint', plugins_url( 'plugins/CodeMirror/addon/hint/javascript-hint.js', __FILE__ ), array('jquery') );
 		/*Editor*/
-
+		wp_enqueue_script( 'jquery.minicolors', plugins_url( 'plugins/colorpicker/jquery.minicolors.js', __FILE__ ), array('jquery') );
 		wp_enqueue_script( 'mos-btt-functions', plugins_url( 'js/mos-btt-functions.js', __FILE__ ), array('jquery') );
 		wp_enqueue_script( 'mos-btt-admin', plugins_url( 'js/mos-btt-admin.js', __FILE__ ), array('jquery') );
 	}
